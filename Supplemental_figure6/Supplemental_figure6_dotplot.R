@@ -110,4 +110,4 @@ hap6vshap23_plot <- ggplot(data = hap6vshap23) +
 
 combo_plot <- ggarrange(hap5vshap24_plot, hap8vshap21_plot, hap6vshap23_plot, ncol = 1, nrow = 3, heights = c(1,1,1))
 
-ggsave("Supplemental_figure5_hybrid_alignments.tiff", combo_plot, device = "tiff", width = 3.5, height = 8, units = "in", dpi = 600)
+ggsave("Supplemental_figure6_hybrid_alignments.tiff", combo_plot, device = "tiff", width = 3.5, height = 8, units = "in", dpi = 600)

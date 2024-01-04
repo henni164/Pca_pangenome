@@ -51,7 +51,7 @@ recombinant_plot <- ggplot(data = recombinant_paf2) +
         panel.border = element_rect(fill = NA, color = "black", linetype = "dashed", linewidth = 0.1),
         plot.margin = unit(c(0,0,0,0), units = "lines"))
 
-ggsave("Supplemental_figure6a.tiff", recombinant_plot, device = "tiff", width = 7, height = 4, units = "in", dpi = 600)
+ggsave("Supplemental_figure7a.tiff", recombinant_plot, device = "tiff", width = 7, height = 4, units = "in", dpi = 600)
 
 ## Supplemental figure 6b
 
@@ -100,5 +100,5 @@ panelbplot <- ggplot(data = hap5_vs_hap26_paf2) +
         panel.border = element_rect(fill = NA, color = "black", linetype = "dashed", linewidth = 0.1),
         plot.margin = unit(c(0,0,0,0), units = "lines"))
 
-ggsave("Supplemental_figure6b.tiff", panelbplot, device = "tiff", width = 4, height = 4, units = "in", dpi = 1200)
+ggsave("Supplemental_figure7b.tiff", panelbplot, device = "tiff", width = 4, height = 4, units = "in", dpi = 1200)
 

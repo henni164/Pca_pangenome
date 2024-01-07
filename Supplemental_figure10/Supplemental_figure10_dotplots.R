@@ -40,18 +40,18 @@ recombinant_plot <- ggplot(data = recombinant_paf2) +
   labs(x = "20NSW19", y = "20WA94 hap25") +
   theme(axis.text = element_blank(),
         panel.spacing = unit(0, "lines"),
-        strip.text.y = element_text(angle = 0, color = "black", size = 6),
-        strip.text.x = element_text(angle = 0, color = "black", size = 6, margin = margin(0.2,0.2,0.2,0.2)),
-        strip.background = element_rect(fill = "white", linewidth = 0.1, colour = "black"),
-        axis.title.x.top = element_text(color = "black", size = 6),
-        axis.title.y.right = element_text(color = "black", size = 6),
+        strip.text.y = element_text(angle = 0, color = "black", size = 8,  margin = margin(0.2,1,0.2,1)),
+        strip.text.x = element_text(angle = 0, color = "black", size = 8, margin = margin(1,0.2,1,0.2)),
+        strip.background = element_rect(fill = "white", linewidth = 0.5, colour = "black"),
+        axis.title.x.top = element_text(color = "black", size = 10),
+        axis.title.y.right = element_text(color = "black", size = 10),
         axis.ticks = element_blank(),
         panel.background = element_blank(),
         legend.position = "none",
-        panel.border = element_rect(fill = NA, color = "black", linetype = "dashed", linewidth = 0.1),
+        panel.border = element_rect(fill = NA, color = "black", linetype = "dashed", linewidth = 0.2),
         plot.margin = unit(c(0,0,0,0), units = "lines"))
 
-ggsave("Supplemental_figure7a.tiff", recombinant_plot, device = "tiff", width = 7, height = 4, units = "in", dpi = 600)
+ggsave("Supplemental_figure10a.tiff", recombinant_plot, device = "tiff", width = 7, height = 4, units = "in", dpi = 600)
 
 ## Supplemental figure 6b
 
@@ -89,16 +89,16 @@ panelbplot <- ggplot(data = hap5_vs_hap26_paf2) +
   labs(x = "20QLD86 hap5", y = "20WA94 hap26") +
   theme(axis.text = element_blank(),
         panel.spacing = unit(0, "lines"),
-        strip.text.y = element_text(angle = 0, color = "black", size = 6),
-        strip.text.x = element_text(angle = 0, color = "black", size = 6, margin = margin(0.2,0.2,0.2,0.2)),
-        strip.background = element_rect(fill = "white", linewidth = 0.1, colour = "black"),
-        axis.title.x.top = element_text(color = "black", size = 6),
-        axis.title.y.right = element_text(color = "black", size = 6),
+        strip.text.y = element_text(angle = 0, color = "black", size = 8, margin = margin(0.2,1,0.2,1)),
+        strip.text.x = element_text(angle = 0, color = "black", size = 8, margin = margin(1,0.2,1,0.2)),
+        strip.background = element_rect(fill = "white", linewidth = 0.5, colour = "black"),
+        axis.title.x.top = element_text(color = "black", size = 10),
+        axis.title.y.right = element_text(color = "black", size = 10),
         axis.ticks = element_blank(),
         panel.background = element_blank(),
         legend.position = "none",
-        panel.border = element_rect(fill = NA, color = "black", linetype = "dashed", linewidth = 0.1),
+        panel.border = element_rect(fill = NA, color = "black", linetype = "dashed", linewidth = 0.2),
         plot.margin = unit(c(0,0,0,0), units = "lines"))
 
-ggsave("Supplemental_figure7b.tiff", panelbplot, device = "tiff", width = 4, height = 4, units = "in", dpi = 1200)
+ggsave("Supplemental_figure10b.tiff", panelbplot, device = "tiff", width = 4, height = 4, units = "in", dpi = 600)
 

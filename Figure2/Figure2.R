@@ -1,110 +1,55 @@
-options(scipen = 999)
 library(ggplot2)
-library(reshape2)
-library(egg)
-
-## Figure 2a chromosome lengths
-chr_dat <- read.delim("Figure2_chromosome_lengths.txt", sep = "\t", header = TRUE)
-colnames(chr_dat) <- c("Haplotype", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18")
-chr_dat$Haplotype <- as.factor(chr_dat$Haplotype)
-chr_dat$Haplotype <- factor(chr_dat$Haplotype, levels = c("hap1","hap2","hap3", "hap4", "hap5", "hap6", "hap7", "hap8", "hap9", "hap10", "hap11", "hap12", "hap13", "hap14", "hap15", "hap16", "hap17", "hap18", "hap19", "hap20","hap21","hap22","hap23","hap24","hap25","hap26","hap27","hap28","hap29","hap30","hap31","hap32"))
-
-chr_melted <- melt(chr_dat, value.name = "Length")
-colnames(chr_melted)[2] <- "Chr"
-chr_melted$Length <- chr_melted$Length/1000000
-
-chr_lengths_plot <- ggplot(chr_melted) +
-  geom_boxplot(aes(x = Chr, y = Length), color = "grey60") +
-  geom_point(aes(x = Chr, y = Length), color = "black", size = 0.5) +
-  scale_y_continuous(expand = c(0.01,0.01)) +
-  labs(x = "Chromosome", y = "Length (Mbp)") +
-  theme(panel.background = element_blank(),
-        panel.grid = element_line(color = "grey90"),
-        axis.text = element_text(size = 8),
-        axis.title = element_text(size = 8))
-
-chr_lengths_plot
-
-ggsave("Figure2a.tiff", chr_lengths_plot, device = "tiff", height = 4.5, width = 5, units = "in", dpi = 600)
+library(ozmaps)
+library(scatterpie)
+library(dplyr)
+library(patchwork)
 
 
-## Figure 2b chr9 region dotplots
+## Figure 4b
+piedat <- read.delim("Figure2_map_piecharts_wide.txt", sep = "\t")
+piedat$state <- as.factor(piedat$state)
 
-hap25vshap13chr9 <- read.delim("C:/Users/HEN294/OneDrive - CSIRO/Documents/Research/Current_projects/Pca_population_study/Mating_loci/hap25_vs_hap13_chr9.paf", sep = "\t", header = FALSE)
-hap25vshap13chr9 <- hap25vshap13chr9[,-(13:17)]
-colnames(hap25vshap13chr9) <- c("qname", "qlength", "qstart", "qend", "strand", "tname", "tlength", "tstart", "tend", "nmatches", "alnlength", "mquality")
-hap25vshap13chr9 <- hap25vshap13chr9[grep("chr", hap25vshap13chr9$qname),]
-
-hap26vshap27chr9 <- read.delim("C:/Users/HEN294/OneDrive - CSIRO/Documents/Research/Current_projects/Pca_population_study/Mating_loci/hap26_vs_hap27_chr9.paf", sep = "\t", header = FALSE)
-hap26vshap27chr9 <- hap26vshap27chr9[,-(13:17)]
-colnames(hap26vshap27chr9) <- c("qname", "qlength", "qstart", "qend", "strand", "tname", "tlength", "tstart", "tend", "nmatches", "alnlength", "mquality")
+map <- ozmap("states")
 
 
-hap26vshap13chr9 <- read.delim("C:/Users/HEN294/OneDrive - CSIRO/Documents/Research/Current_projects/Pca_population_study/Mating_loci/hap26_vs_hap13_chr9.paf", sep = "\t", header = FALSE)
-hap26vshap13chr9 <- hap26vshap13chr9[,-(13:17)]
-colnames(hap26vshap13chr9) <- c("qname", "qlength", "qstart", "qend", "strand", "tname", "tlength", "tstart", "tend", "nmatches", "alnlength", "mquality")
-hap26vshap13chr9 <- hap26vshap13chr9[grep("chr", hap26vshap13chr9$qname),]
+isolate_metadata <- read.csv("Figure2_aus_sequenced_metatadata.csv")
+isolate_metadata$Lineage <- as.factor(isolate_metadata$Lineage)
 
-hap25vshap13chr9_plot <- ggplot(data = hap25vshap13chr9) +
-  geom_segment(data = hap25vshap13chr9, aes(x = qstart, xend = qend, y = tstart, yend = tend), color = "black", linewidth = 0.3) +
-  scale_y_continuous(position = "left", expand = c(0,0), labels = function(x)x/1000000, breaks = c(2000000,2300000,2600000), sec.axis = dup_axis()) +
-  scale_x_continuous(position = "bottom", expand = c(0,0), labels = function(x)x/1000000, breaks = c(2100000,2400000,2700000), sec.axis = dup_axis()) +
-  labs(x = "hap13", y = "hap25") +
-  coord_cartesian(xlim = c(2000000,2850000), ylim = c(1850000,2800000)) +
-  theme(axis.text = element_text(color = "black", size = 8),
-        axis.title.y.right = element_text(color = "black", size = 10, margin = margin(l = 0.01)),
-        axis.title.y.left = element_blank(),
-        axis.title.x.top = element_text(color = "black", size = 10, margin = margin(l = 0.01)),
-        axis.title.x.bottom = element_blank(),
-        axis.text.x.top = element_blank(),
-        axis.ticks.x.top = element_blank(),
-        axis.text.y.right = element_blank(),
-        axis.ticks.y.right = element_blank(),
-        panel.grid.major = element_line(color = "grey70", linewidth = 0.3, linetype = "dashed"),
-        panel.background = element_blank(),
-        panel.border = element_rect(fill = NA, color = "black", linewidth = 0.5),
-        plot.margin = margin(b = 4, r = 0.1, l = 0.1))
+ACT <- abs_lga %>% dplyr::filter(grepl("ACT", NAME))
 
-hap26vshap27chr9_plot <- ggplot(data = hap26vshap27chr9) +
-  geom_segment(data = hap26vshap27chr9, aes(x = qstart, xend = qend, y = tstart, yend = tend), color = "black", linewidth = 0.3) +
-  scale_y_continuous(position = "left", expand = c(0,0), labels = function(x)x/1000000, breaks = c(1700000,2000000,2300000), sec.axis = dup_axis()) +
-  scale_x_continuous(position = "bottom", expand = c(0,0), labels = function(x)x/1000000, breaks = c(1700000,1900000,2100000), sec.axis = dup_axis()) +
-  coord_cartesian(xlim = c(1600000,2200000), ylim = c(1600000,2400000)) +
-  labs(x = "hap27", y = "hap26") +
-  theme(panel.background = element_rect(fill = NA),
-        panel.border = element_rect(fill = NA, color = "black", linewidth = 0.5),
-        axis.text = element_text(color = "black", size = 8),
-        axis.title.y.right = element_text(color = "black", size = 10, margin = margin(l = 0.01)),
-        axis.title.y.left = element_blank(),
-        axis.title.x.top = element_text(color = "black", size = 10, margin = margin(l = 0.01)),
-        axis.title.x.bottom = element_blank(),
-        axis.text.x.top = element_blank(),
-        axis.ticks.x.top = element_blank(),
-        axis.text.y.right = element_blank(),
-        axis.ticks.y.right = element_blank(),
-        panel.grid.major = element_line(color = "grey70", linewidth = 0.3, linetype = "dashed"),
-        plot.margin = margin(b = 2, t = 2, r = 1, l = 1))
+ACT_box_window <- ggplot(data = ACT) + 
+  geom_sf(data = ACT, fill = "white",linewidth = 0.7, color = "grey70") +
+  geom_point(data = isolate_metadata[isolate_metadata$State == "ACT",], aes(x = long, y = lat, color = Lineage), size = 1, alpha = 0.6) +
+  geom_rect(aes(xmin = 149.45, xmax = 148.7, ymin = -35.95, ymax = -35.1), fill = NA, color = "black", linewidth = 0.2) +
+  geom_text(aes(x = 149.27, y = -35.6, label = "ACT\nN = 9"), size = 2) +
+  scale_color_manual(values = c("black", "grey30", "red")) +
+  theme_void() +
+  theme(legend.position = "none")
 
-hap26vshap13chr9_plot <- ggplot(data = hap26vshap13chr9) +
-  geom_segment(data = hap26vshap13chr9, aes(x = qstart, xend = qend, y = tstart, yend = tend), color = "black", linewidth = 0.3) +
-  scale_y_continuous(position = "left", expand = c(0,0), labels = function(x)x/1000000, breaks = c(1700000,2100000,2500000), sec.axis = dup_axis()) +
-  scale_x_continuous(position = "bottom", expand = c(0,0), labels = function(x)x/1000000, breaks = c(1800000,2300000,2800000), sec.axis = dup_axis()) +
-  coord_cartesian(xlim = c(1600000,3000000), ylim = c(1500000,2700000)) +
-  labs(x = "hap13", y = "hap26") +
-  theme(axis.text = element_text(color = "black", size = 8),
-        axis.title.y.right = element_text(color = "black", size = 10, margin = margin(l = 0.01)),
-        axis.title.y.left = element_blank(),
-        axis.title.x.top = element_text(color = "black", size = 10, margin = margin(l = 0.01)),
-        axis.title.x.bottom = element_blank(),
-        axis.text.x.top = element_blank(),
-        axis.ticks.x.top = element_blank(),
-        axis.text.y.right = element_blank(),
-        axis.ticks.y.right = element_blank(),
-        panel.grid.major = element_line(color = "grey70", linewidth = 0.3, linetype = "dashed"),
-        panel.background = element_blank(),
-        panel.border = element_rect(fill = NA, color = "black", linewidth = 0.5),
-        plot.margin = margin(t = 4, r = 1, l = 1))
 
-combo_plot <- ggarrange(hap25vshap13chr9_plot, hap26vshap27chr9_plot, hap26vshap13chr9_plot, ncol = 1, nrow = 3, heights = c(1,1,1))
 
-ggsave("Figure2b.tiff", combo_plot, device = "tiff", width = 1.8, height = 4.75, units = "in", dpi = 600)
+map_plot <- ggplot(data = map) + 
+  geom_sf(data = map, fill = "white", linewidth = 0.7, color = "grey70") +
+  geom_scatterpie(aes(x=lat, y=long, group = state, r = log10(total)*2), 
+                  data = piedat, cols = colnames(piedat[,c(4:(ncol(piedat)-1))]), legend_name = "Lineage", color = NA) +
+  geom_point(data = isolate_metadata, aes(x = long, y = lat, color = Lineage), size = 1, alpha = 0.6) +
+  geom_text(data = piedat, aes(x = (lat + (log10(total)*2) + 1.6), y = (long + 0.5), label = paste(state,"\nN = ",total, sep ="")), size = 2) +
+  scale_color_manual(values = c("black", "grey30", "#23A6FE","#95D4FF", "#558035", "#8EC763", "#B6EA90", "#FDD9A0", "#FF9C00","#895501", "#C75A52","#FE9F98","#D297F1", "#A406F8", "#F939F3","#A50076","red"),labels = c("L1","L2","L3","L4","L5","L6","L7","L8","L9","L10","L11","L12","L13","L14","L15","L16","L17")) + 
+  scale_fill_manual(values = c("black", "grey30", "#23A6FE","#95D4FF", "#558035", "#8EC763", "#B6EA90", "#FDD9A0", "#FF9C00", "#895501", "#C75A52", "#FE9F98","#D297F1", "#A406F8","#F939F3","#A50076","red"), guide = "none") +
+  coord_sf(xlim = c(112,157), ylim = c(-45,-10)) +
+  theme_void() +
+  theme(legend.position = c(0.1,0.8),
+        legend.text = element_text(size = 8),
+        legend.title = element_text(size = 8),
+        legend.key.width = unit(0.1, units = "in"),
+        legend.key.height = unit(0.1, units = "in"),
+        legend.direction = "vertical") +
+  guides(color = guide_legend(nrow = 9)) +
+  geom_segment(aes(x = 148.9, xend = 151.46, y = -35.9, yend = -41.45), color = 'black', linewidth = 0.4) +
+  geom_segment(aes(x = 149, xend = 151.5, y = -35.1, yend = -34.4), color = 'black', linewidth = 0.4) +
+  inset_element(ACT_box_window, left = 0.8, bottom = 0.13, right = 1, top = 0.33)
+
+
+
+ggsave(filename = "Figure2b.tiff", plot = map_plot, device = "tiff", width = 6, height = 5, dpi = 600, units = "in")
+

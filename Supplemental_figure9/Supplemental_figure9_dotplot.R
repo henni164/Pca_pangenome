@@ -51,13 +51,13 @@ hap5vshap24_plot <- ggplot(data = hap5vshap24) +
         panel.spacing = unit(0, "lines"),
         strip.text.y = element_text(angle = 0, color = "black", size = 8),
         strip.text.x = element_text(angle = 0, color = "black", size = 8),
-        strip.background = element_rect(fill = "white", linewidth = 0.1, colour = "black"),
+        strip.background = element_rect(fill = "white", linewidth = 0.5, colour = "black"),
         axis.title.x = element_text(color = "black", size = 8),
         axis.title.y = element_text(color = "black", size = 8),
         axis.ticks = element_blank(),
         panel.background = element_blank(),
         legend.position = "none",
-        panel.border = element_rect(fill = NA, color = "black", linetype = "dashed", linewidth = 0.1),
+        panel.border = element_rect(fill = NA, color = "black", linetype = "dashed", linewidth = 0.2),
         plot.margin = unit(c(0,0,0,0), units = "lines"))
 
 hap8vshap21_plot <- ggplot(data = hap8vshap21) +
@@ -71,14 +71,14 @@ hap8vshap21_plot <- ggplot(data = hap8vshap21) +
   theme(axis.text = element_blank(),
         panel.spacing = unit(0, "lines"),
         strip.text.y = element_text(angle = 0, color = "black", size = 8),
-        strip.text.x = element_blank(),
-        strip.background = element_rect(fill = "white", linewidth = 0.1, colour = "black"),
+        strip.text.x = element_text(angle = 0, color = "black", size = 8),
+        strip.background = element_rect(fill = "white", linewidth = 0.5, colour = "black"),
         axis.title.x = element_text(color = "black", size = 8),
         axis.title.y = element_text(color = "black", size = 8),
         axis.ticks = element_blank(),
         panel.background = element_blank(),
-        legend.position = "right",
-        panel.border = element_rect(fill = NA, color = "black", linetype = "dashed", linewidth = 0.1),
+        legend.position = "none",
+        panel.border = element_rect(fill = NA, color = "black", linetype = "dashed", linewidth = 0.2),
         legend.text = element_text(size = 8),
         legend.title = element_text(size = 8),
         legend.key.height = unit(0.4, units = "cm"),
@@ -97,17 +97,21 @@ hap6vshap23_plot <- ggplot(data = hap6vshap23) +
   theme(axis.text = element_blank(),
         panel.spacing = unit(0, "lines"),
         strip.text.y = element_text(angle = 0, color = "black", size = 8),
-        strip.text.x = element_blank(),
+        strip.text.x = element_text(angle = 0, color = "black", size = 8),
         axis.title = element_text(color = "black", size = 8),
         axis.ticks = element_blank(),
-        strip.background = element_rect(fill = "white", linewidth = 0.1, colour = "black"),
-        legend.title = element_text(color = "black", size = 6),
-        legend.text = element_text(color = "black", size = 6),
+        strip.background = element_rect(fill = "white", linewidth = 0.5, colour = "black"),
+        legend.text = element_text(size = 8),
+        legend.title = element_text(size = 8),
+        legend.key.height = unit(0.2, units = "cm"),
+        legend.key.width = unit(0.4, units = "cm"),
         panel.background = element_blank(),
-        legend.position = "none",
-        panel.border = element_rect(fill = NA, color = "black", linetype = "dashed", linewidth = 0.1),
-        plot.margin = unit(c(1,0,0,0), units = "lines"))
+        legend.position = "bottom",
+        legend.direction = "horizontal",
+        panel.border = element_rect(fill = NA, color = "black", linetype = "dashed", linewidth = 0.2),
+        plot.margin = unit(c(1,0,0,0), units = "lines"),
+        legend.box.margin=margin(-5,-5,-5,-5))
 
 combo_plot <- ggarrange(hap5vshap24_plot, hap8vshap21_plot, hap6vshap23_plot, ncol = 1, nrow = 3, heights = c(1,1,1))
 
-ggsave("Supplemental_figure6_hybrid_alignments.tiff", combo_plot, device = "tiff", width = 3.5, height = 8, units = "in", dpi = 600)
+ggsave("Supplemental_figure9_hybrid_alignments.tiff", combo_plot, device = "tiff", width = 3.1, height = 10, units = "in", dpi = 600)

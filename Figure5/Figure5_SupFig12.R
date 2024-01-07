@@ -28,7 +28,7 @@ chr_labels <- c(
   chr18 = "18"
 )
 
-haps_chrs <- read.delim("Figure2_chromosome_lengths.txt", sep = "\t", header = TRUE)
+haps_chrs <- read.delim("Figure3_chromosome_lengths.txt", sep = "\t", header = TRUE)
 colnames(haps_chrs) <- c("HAP","chr1","chr2","chr3","chr4","chr5","chr6","chr7","chr8","chr9","chr10","chr11","chr12","chr13","chr14","chr15","chr16","chr17","chr18")
 chrlen_melt <-melt(haps_chrs, id.vars = "HAP", variable.name = "CHROM", value.name = "len")
 chrlen_melt$CHROM <- factor(chrlen_melt$CHROM, levels = c("chr1","chr2","chr3","chr4","chr5","chr6","chr7","chr8","chr9","chr10","chr11","chr12","chr13","chr14","chr15","chr16","chr17","chr18"))
@@ -166,4 +166,4 @@ plot <- ggplot(data = keepme, aes(y = HAP)) +
         axis.ticks.x = element_blank()) +
   guides(color = guide_legend(nrow = 1, override.aes = list(size = 1, fill = NA, linetype = 0)))
 
-ggsave("Supplemental_figure10_pangenome_blocks.tiff", plot, device = "tiff", width = 7, height = 9, units = "in", dpi = 600)
+ggsave("Supplemental_figure12_pangenome_blocks.tiff", plot, device = "tiff", width = 7, height = 9, units = "in", dpi = 600)

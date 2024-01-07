@@ -4,7 +4,7 @@ library(ape)
 library(phytools)
 library(ggplot2)
 
-scoring_data <- read.csv("Supplemental_figure9_pathotypes.csv", header=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+scoring_data <- read.csv("Supplemental_figure3_pathotypes.csv", header=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
 
 key <- setNames(c(0, 0, 0, 0, 1, 1, 1, 2, 2, 2), c("0", "0;", ";", ";C", "1;", "1", "2", "3", "3+", "4"))
 
@@ -20,7 +20,7 @@ rownames(scoring_matrix) = row_names
 
 pathotype_clust <- as.dendrogram(hclust(dist(scoring_matrix), method = "complete"))
 
-phylo_tree <- read.tree(file = "Supplemental_figure9_aus_pruned.nwk")
+phylo_tree <- read.tree(file = "Supplemental_figure3_aus_pruned.nwk")
 phylo_tree$node.label <- NULL
 chrono <- chronos(phylo_tree, 1)
 plotTree.singletons(chrono)
@@ -38,7 +38,7 @@ repeat_tests <- dendextend::untangle_step_rotate_1side(pathotype_clust, phylo_de
 dendextend::tanglegram(repeat_tests, edge.lwd = 1, main_left = "Pathotype clustering", main_right = "Genetic phylogeny",
                        lwd = 1, columns_width = c(3,1,3), margin_inner = 4.7, axes = FALSE, cex_main = 1.4, lab.cex = 1, margin_top = 1, margin_bottom = 1, margin_outer = 1, rank_branches = TRUE)
 
-dev.copy(pdf, "Supplemental_figure9_tanglegram.pdf", width = 8, height = 8)
+dev.copy(pdf, "Supplemental_figure3_tanglegram.pdf", width = 8, height = 8)
 dev.off()
 
 cor_bakers_gamma(repeat_tests)

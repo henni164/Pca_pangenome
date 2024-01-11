@@ -21,7 +21,7 @@ ACT_box_window <- ggplot(data = ACT) +
   geom_sf(data = ACT, fill = "white",linewidth = 0.7, color = "grey70") +
   geom_point(data = isolate_metadata[isolate_metadata$State == "ACT",], aes(x = long, y = lat, color = Lineage), size = 1, alpha = 0.6) +
   geom_rect(aes(xmin = 149.45, xmax = 148.7, ymin = -35.95, ymax = -35.1), fill = NA, color = "black", linewidth = 0.2) +
-  geom_text(aes(x = 149.27, y = -35.6, label = "ACT\nN = 9"), size = 2) +
+  geom_text(aes(x = 149.27, y = -35.6, label = "ACT\nn = 9"), size = 2) +
   scale_color_manual(values = c("black", "grey30", "red")) +
   theme_void() +
   theme(legend.position = "none")
@@ -33,7 +33,7 @@ map_plot <- ggplot(data = map) +
   geom_scatterpie(aes(x=lat, y=long, group = state, r = log10(total)*2), 
                   data = piedat, cols = colnames(piedat[,c(4:(ncol(piedat)-1))]), legend_name = "Lineage", color = NA) +
   geom_point(data = isolate_metadata, aes(x = long, y = lat, color = Lineage), size = 1, alpha = 0.6) +
-  geom_text(data = piedat, aes(x = (lat + (log10(total)*2) + 1.6), y = (long + 0.5), label = paste(state,"\nN = ",total, sep ="")), size = 2) +
+  geom_text(data = piedat, aes(x = (lat + (log10(total)*2) + 1.6), y = (long + 0.5), label = paste(state,"\nn = ",total, sep ="")), size = 2) +
   scale_color_manual(values = c("black", "grey30", "#23A6FE","#95D4FF", "#558035", "#8EC763", "#B6EA90", "#FDD9A0", "#FF9C00","#895501", "#C75A52","#FE9F98","#D297F1", "#A406F8", "#F939F3","#A50076","red"),labels = c("L1","L2","L3","L4","L5","L6","L7","L8","L9","L10","L11","L12","L13","L14","L15","L16","L17")) + 
   scale_fill_manual(values = c("black", "grey30", "#23A6FE","#95D4FF", "#558035", "#8EC763", "#B6EA90", "#FDD9A0", "#FF9C00", "#895501", "#C75A52", "#FE9F98","#D297F1", "#A406F8","#F939F3","#A50076","red"), guide = "none") +
   coord_sf(xlim = c(112,157), ylim = c(-45,-10)) +

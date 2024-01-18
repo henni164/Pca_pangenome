@@ -116,32 +116,35 @@ plot2 <- ggplot(data = just_aus, aes(y = HAP)) +
 ggsave("Figure5_pangenome_blocks.tiff", plot2, device = "tiff", width = 7.5, height = 6, units = "in", dpi = 600)
 
 
+## subset
+figS12_chr_sub <- subset(chrlen_melt, !(HAP %in% c("hap25","hap7","hap8","hap27","hap28","hap29","hap30","hap31","hap32")))
 
-## Supplemental Figure 10
+figures12_revised <- subset(keepme, !(HAP %in% c("hap25","hap7","hap8","hap27","hap28","hap29","hap30","hap31","hap32")))
+figures12_revised <- subset(figures12_revised, !(REFHAP %in% c("hap25","hap7","hap8","hap27","hap28","hap29","hap30","hap31","hap32","hap19","hap20","hap6","hap10","hap12","hap23","hap9")))
 
-plot <- ggplot(data = keepme, aes(y = HAP)) +
+
+
+## Supplemental Figure 12
+
+plot <- ggplot(data = figures12_revised, aes(y = HAP)) +
   geom_point(aes(x = len+50000), y = -0.5, color = "white") +
   geom_point(aes(x = len+50000), y = 1.5, color = "white") +
   geom_point(x = -50000, y = -0.5, color = "white") +
   geom_point(x = -50000, y = 1.5, color = "white") +
-  ggchicklet:::geom_rrect(data = chrlen_melt, aes(xmax = len, fill = HAP), xmin = 1, ymin = 0, ymax = 1, r = unit(0.3, 'npc')) +
+  ggchicklet:::geom_rrect(data = figS12_chr_sub, aes(xmax = len, fill = HAP), xmin = 1, ymin = 0, ymax = 1, r = unit(0.3, 'npc')) +
   geom_segment(aes(x = start, xend = end, color = REFHAP, group = HAP), y = 0.5, yend = 0.5, linewidth = 3.7, key_glyph = "pointrange") +
-  ggchicklet:::geom_rrect(data= chrlen_melt, aes(xmax = len+50000), xmin = -49999, ymin = -0.1, ymax = 1.1, r = unit(0.3, 'npc'), color = "white", fill = NA, size = 0.35) +
+  ggchicklet:::geom_rrect(data= figS12_chr_sub, aes(xmax = len+50000), xmin = -49999, ymin = -0.1, ymax = 1.1, r = unit(0.3, 'npc'), color = "white", fill = NA, size = 0.35) +
   facet_grid(HAP ~ CHROM, labeller = labeller(CHROM = chr_labels), scales = "free_x", space = "free_x", switch = "y", margins = FALSE) +
   scale_x_continuous(expand = c(0.01,0.01)) +
   scale_y_discrete(limits=rev, expand = c(0.01,0.01)) +
-  scale_color_manual(breaks = c("hap3","hap4","hap25","hap26","hap5","hap7","hap8",
-                                "hap27","hap28","hap29","hap30","hap31","hap32","hap14","hap1","hap2","hap13",
+  scale_color_manual(breaks = c("hap3","hap4","hap26","hap5","hap14","hap1","hap2","hap13",
                                 "hap11","hap15","hap16","hap17","hap18","hap19","hap20","hap6","hap10","hap12","hap23","hap9"),
-                     values = c("#FA0348","#C581FC","grey20","#FA8203","#5EE3EF","grey20","grey20",
-                                "grey20","grey20","grey20","grey20","grey20","grey20","#006023","#FF00F7","#0056FF","#FFCD97",
+                     values = c("#FA0348","#C581FC","#FA8203","#5EE3EF","#006023","#FF00F7","#0056FF","#FFCD97",
                                 "#DDB8FF","#CFFFB8","#45C48C","#AEB431","#6BA9B4","grey20","grey20","grey20","grey20","grey20","grey20","grey20"), 
                      name = "Color key", drop = TRUE, limits = c("hap3","hap4","hap26","hap5","hap14","hap1","hap2","hap13","hap11","hap15","hap16","hap17","hap18")) +
-  scale_fill_manual(breaks = c("hap3","hap4","hap25","hap26","hap5","hap7","hap8",
-                               "hap27","hap28","hap29","hap30","hap31","hap32","hap14","hap1","hap2","hap13",
+  scale_fill_manual(breaks = c("hap3","hap4","hap26","hap5","hap14","hap1","hap2","hap13",
                                "hap11","hap15","hap16","hap17","hap18","hap19","hap20","hap6","hap10","hap12","hap23","hap9"),
-                    values = c("#FA0348","#C581FC","grey20","#FA8203","#5EE3EF","grey20","grey20",
-                               "grey20","grey20","grey20","grey20","grey20","grey20","#006023","#FF00F7","#0056FF","#FFCD97",
+                    values = c("#FA0348","#C581FC","#FA8203","#5EE3EF","#006023","#FF00F7","#0056FF","#FFCD97",
                                "#DDB8FF","#CFFFB8","#45C48C","#AEB431","#6BA9B4","grey20","grey20","grey20","grey20","grey20","grey20","grey20"), 
                     name = "Color key", drop = TRUE, guide = "none") +
   coord_cartesian(ylim = c(-0.6,1.6)) + 
@@ -159,11 +162,11 @@ plot <- ggplot(data = keepme, aes(y = HAP)) +
         legend.key.size = unit(c(0.1), units = "in"),
         plot.margin = unit(c(0,0,1.1,0), units = "lines"),
         panel.spacing = unit(0, units = "lines"),
-        legend.position = c(-0.085,-0.01),
+        legend.position = c(-0.01,-0.01),
         legend.background = element_blank(),
         legend.justification = "left",
         strip.background.x = element_blank(),
         axis.ticks.x = element_blank()) +
   guides(color = guide_legend(nrow = 1, override.aes = list(size = 1, fill = NA, linetype = 0)))
 
-ggsave("Supplemental_figure12_pangenome_blocks.tiff", plot, device = "tiff", width = 7, height = 9, units = "in", dpi = 600)
+ggsave("Supplemental_figure12_pangenome_blocks.tiff", plot, device = "tiff", width = 7.5, height = 5.5, units = "in", dpi = 600)

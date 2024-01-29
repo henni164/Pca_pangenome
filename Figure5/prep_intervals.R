@@ -74,7 +74,7 @@ lapply(haplotypes, function(j) {
       chr_sub2 <- subset2[subset2$CHROM == z,]
       
       plot <- ggplot(data = chr_sub, aes(x = POS)) +
-        geom_histogram(binwidth = 10000) +
+        geom_histogram(binwidth = 100000) +
         ggtitle(paste(i,"_",z, sep = ""))
       
       plotdat <- ggplot_build(plot)
@@ -100,7 +100,7 @@ lapply(haplotypes, function(j) {
   
   bedtools_test <- bedtools_test[bedtools_test$varcounts > 0,]
   bedtools_test <- bedtools_test %>%
-    mutate(strand = if_else(count <= 5, "+", "-"))
+    mutate(strand = if_else(count <= 50, "+", "-"))
   
   bedtools_test <- bedtools_test[,c(1,2,3,4,5,7)]
   bedtools_test$start <- as.integer(bedtools_test$start)

@@ -26,8 +26,6 @@ FIELD_LABELS	Swan	Pc14	Pc35	Pc36	Pc38	Pc39	Pc40	Pc45	Pc46	Pc48	Pc50	Pc51	Pc52	Pc
 #Heatmaps can have an optional Newick formatted tree assigned. Its leaf IDs must exactly match the dataset FIELD_LABELS.
 #The tree will be used to sort the dataset fields, and will be displayed above the dataset. It can have branch lengths defined.
 #All newlines and spaces should be stripped from the tree, and COMMA cannot be used as the dataset separator if a FIELD_TREE is provided.
-FIELD_TREE	((((Pc63:0.495139793531988,(Amagalon:0.68319062174595,(Culgoa:1.88325958557674,WIX4361-9:1.88325958557674):0.68319062174595):0.495139793531988):0,(Pc50:0.866938487938159,((Pc38:0.866025403784439,Pc58:0.866025403784439):0,(Pc52:1.80277563773199,Pc68:1.80277563773199):0):0.866938487938159):0):0,((Pc35:1.37867965644036,(Pc36:2.12132034355964,Pc56:2.12132034355964):1.37867965644036):0,(Pc48:1.33922344420265,(Pc39:2.78388218141501,Pc71:2.78388218141501):1.33922344420265):0):0):0,(((Pc67:0.795300573621321,(Pc14:0.936750233947556,(Swan:0.866025403784439,Pc70:0.866025403784439):0.936750233947556):0.795300573621321):0,(Pc45:2.64575131106459,Pc54:2.64575131106459):0):0,(((Pc51:2.91547594742265,X716:2.91547594742265):0,(Pc40:3.3166247903554,Pc57:3.3166247903554):0):0,((Pc62:2.95803989154981,Pc64:2.95803989154981):0,(Pc46:3.64005494464026,Pc61:3.64005494464026):0):0):0):0);
-
 
 #=================================================================#
 #     all other optional settings can be set or changed later     #

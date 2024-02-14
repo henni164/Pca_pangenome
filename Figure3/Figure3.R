@@ -3,7 +3,7 @@ library(ggplot2)
 library(reshape2)
 library(egg)
 
-## Figure 2a chromosome lengths
+## Figure 3b chromosome lengths
 chr_dat <- read.delim("Figure3_chromosome_lengths.txt", sep = "\t", header = TRUE)
 colnames(chr_dat) <- c("Haplotype", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18")
 chr_dat$Haplotype <- as.factor(chr_dat$Haplotype)
@@ -25,22 +25,22 @@ chr_lengths_plot <- ggplot(chr_melted) +
 
 chr_lengths_plot
 
-ggsave("Figure3a.tiff", chr_lengths_plot, device = "tiff", height = 4.5, width = 5, units = "in", dpi = 600)
+ggsave("Figure3b.tiff", chr_lengths_plot, device = "tiff", height = 4.5, width = 5, units = "in", dpi = 600)
 
 
-## Figure 2b chr9 region dotplots
+## Figure 3c chr9 region dotplots
 
-hap25vshap13chr9 <- read.delim("C:/Users/HEN294/OneDrive - CSIRO/Documents/Research/Current_projects/Pca_population_study/Mating_loci/hap25_vs_hap13_chr9.paf", sep = "\t", header = FALSE)
+hap25vshap13chr9 <- read.delim("hap25_vs_hap13_chr9.paf", sep = "\t", header = FALSE)
 hap25vshap13chr9 <- hap25vshap13chr9[,-(13:17)]
 colnames(hap25vshap13chr9) <- c("qname", "qlength", "qstart", "qend", "strand", "tname", "tlength", "tstart", "tend", "nmatches", "alnlength", "mquality")
 hap25vshap13chr9 <- hap25vshap13chr9[grep("chr", hap25vshap13chr9$qname),]
 
-hap26vshap27chr9 <- read.delim("C:/Users/HEN294/OneDrive - CSIRO/Documents/Research/Current_projects/Pca_population_study/Mating_loci/hap26_vs_hap27_chr9.paf", sep = "\t", header = FALSE)
+hap26vshap27chr9 <- read.delim("hap26_vs_hap27_chr9.paf", sep = "\t", header = FALSE)
 hap26vshap27chr9 <- hap26vshap27chr9[,-(13:17)]
 colnames(hap26vshap27chr9) <- c("qname", "qlength", "qstart", "qend", "strand", "tname", "tlength", "tstart", "tend", "nmatches", "alnlength", "mquality")
 
 
-hap26vshap13chr9 <- read.delim("C:/Users/HEN294/OneDrive - CSIRO/Documents/Research/Current_projects/Pca_population_study/Mating_loci/hap26_vs_hap13_chr9.paf", sep = "\t", header = FALSE)
+hap26vshap13chr9 <- read.delim("hap26_vs_hap13_chr9.paf", sep = "\t", header = FALSE)
 hap26vshap13chr9 <- hap26vshap13chr9[,-(13:17)]
 colnames(hap26vshap13chr9) <- c("qname", "qlength", "qstart", "qend", "strand", "tname", "tlength", "tstart", "tend", "nmatches", "alnlength", "mquality")
 hap26vshap13chr9 <- hap26vshap13chr9[grep("chr", hap26vshap13chr9$qname),]
@@ -107,4 +107,4 @@ hap26vshap13chr9_plot <- ggplot(data = hap26vshap13chr9) +
 
 combo_plot <- ggarrange(hap25vshap13chr9_plot, hap26vshap27chr9_plot, hap26vshap13chr9_plot, ncol = 1, nrow = 3, heights = c(1,1,1))
 
-ggsave("Figure3b.tiff", combo_plot, device = "tiff", width = 1.8, height = 4.75, units = "in", dpi = 600)
+ggsave("Figure3c.tiff", combo_plot, device = "tiff", width = 1.8, height = 4.75, units = "in", dpi = 600)

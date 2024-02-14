@@ -33,7 +33,7 @@ colnames(haps_chrs) <- c("HAP","chr1","chr2","chr3","chr4","chr5","chr6","chr7",
 chrlen_melt <-melt(haps_chrs, id.vars = "HAP", variable.name = "CHROM", value.name = "len")
 chrlen_melt$CHROM <- factor(chrlen_melt$CHROM, levels = c("chr1","chr2","chr3","chr4","chr5","chr6","chr7","chr8","chr9","chr10","chr11","chr12","chr13","chr14","chr15","chr16","chr17","chr18"))
 
-merged_intervals <- read.delim("C:/Users/HEN294/OneDrive - CSIRO/Documents/GitHub/Pca_pangenome/Figure5/all_intervals_fig5a.txt", sep = "\t", header = FALSE)
+merged_intervals <- read.delim("all_intervals_fig5a.txt", sep = "\t", header = FALSE)
 
 colnames(merged_intervals) <- c("CHROM","start","end","HAP","dens","REFHAP")
 merged_intervals <- merged_intervals[,c(4,1,2,3,6)]
@@ -107,7 +107,7 @@ ggsave("Figure5_pangenome_blocks_100kb_panela.tiff", plot, device = "tiff", widt
 
 ## fig5b
 
-merged_intervals <- read.delim("C:/Users/HEN294/OneDrive - CSIRO/Documents/GitHub/Pca_pangenome/Figure5/all_intervals_fig5b.txt", sep = "\t", header = FALSE)
+merged_intervals <- read.delim("all_intervals_fig5b.txt", sep = "\t", header = FALSE)
 
 colnames(merged_intervals) <- c("CHROM","start","end","HAP","dens","REFHAP")
 merged_intervals <- merged_intervals[,c(4,1,2,3,6)]
@@ -176,7 +176,7 @@ ggsave("Figure5_pangenome_blocks_100kb_panelb.tiff", plot2, device = "tiff", wid
 
 
 ## Figure S12 subset a
-merged_intervals <- read.delim("C:/Users/HEN294/OneDrive - CSIRO/Documents/GitHub/Pca_pangenome/Figure5/all_intervals_figs12a.txt", sep = "\t", header = FALSE)
+merged_intervals <- read.delim("all_intervals_figs12a.txt", sep = "\t", header = FALSE)
 
 colnames(merged_intervals) <- c("CHROM","start","end","HAP","dens","REFHAP")
 merged_intervals <- merged_intervals[,c(4,1,2,3,6)]
@@ -242,7 +242,7 @@ plot3 <- ggplot(data = figures12_revised, aes(y = HAP)) +
 ggsave("Supplemental_figure12_pangenome_blocks_100kb_panela.tiff", plot3, device = "tiff", width = 7.5, height = 2.7, units = "in", dpi = 600)
 
 ## Figure S12 subset b
-merged_intervals <- read.delim("C:/Users/HEN294/OneDrive - CSIRO/Documents/GitHub/Pca_pangenome/Figure5/all_intervals_figs12b.txt", sep = "\t", header = FALSE)
+merged_intervals <- read.delim("all_intervals_figs12b.txt", sep = "\t", header = FALSE)
 
 colnames(merged_intervals) <- c("CHROM","start","end","HAP","dens","REFHAP")
 merged_intervals <- merged_intervals[,c(4,1,2,3,6)]
@@ -264,10 +264,6 @@ figures12_revised <- figures12_revised[!is.na(figures12_revised$REFHAP),]
 
 
 ## Supplemental Figure 12b
-
-
-
-
 
 plot3 <- ggplot(data = figures12_revised, aes(y = HAP)) +
   geom_point(aes(x = len+50000), y = -0.5, color = "white") +

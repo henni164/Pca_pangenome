@@ -33,6 +33,7 @@ hap5_vs_hap26_paf$perc <- (hap5_vs_hap26_paf$nmatches/hap5_vs_hap26_paf$alnlengt
 hap5_vs_hap26_paf2 <- hap5_vs_hap26_paf[hap5_vs_hap26_paf$perc >= 95,]
 
 p1v2 <- ggplot(data = hap5_vs_hap26_paf2) +
+  ggchicklet:::geom_rrect(data= hap5_vs_hap26_paf2, aes(xmax = tlength+30000), xmin = -29999, ymin = -0.05, ymax = 1.05, r = unit(0.05, 'npc'), color = NA, fill = "#9BA9E7", size = 0.35) +
   geom_segment(aes(x = tstart, xend = tend), color = "#0027D9", y = 0.5, yend = 0.5, linewidth = 9.5, key_glyph = "pointrange") +
   ggchicklet:::geom_rrect(data= hap5_vs_hap26_paf2, aes(xmax = tlength+30000), xmin = -29999, ymin = -0.05, ymax = 1.05, r = unit(0.05, 'npc'), color = "black", fill = NA, size = 0.35) +
   facet_wrap(~ tname, scales = "fixed", ncol = 18, drop = FALSE) +
@@ -55,7 +56,7 @@ p1v2 <- ggplot(data = hap5_vs_hap26_paf2) +
 
 
 p2 <- ggplot(data = hap5_vs_hap26_paf2) +
-  ggchicklet:::geom_rrect(data= hap5_vs_hap26_paf2, aes(xmax = qlength+30000), xmin = -29999, ymin = -0.05, ymax = 1.05, r = unit(0.05, 'npc'), color = NA, fill = NA, size = 0.35) +
+  ggchicklet:::geom_rrect(data= hap5_vs_hap26_paf2, aes(xmax = qlength+30000), xmin = -29999, ymin = -0.05, ymax = 1.05, r = unit(0.05, 'npc'), color = NA, fill = "#6CAD00", size = 0.35) +
   geom_segment(aes(x = qstart, xend = qend), color = "#0027D9", y = 0.5, yend = 0.5, linewidth = 9.5, key_glyph = "pointrange") +
   ggchicklet:::geom_rrect(data= hap5_vs_hap26_paf2, aes(xmax = qlength+30000), xmin = -29999, ymin = -0.05, ymax = 1.05, r = unit(0.05, 'npc'), color = "black", fill = NA, size = 0.35) +
   facet_wrap( ~ qname, scales = "fixed", ncol = 18, drop = FALSE) +

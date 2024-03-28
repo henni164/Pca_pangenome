@@ -14,9 +14,11 @@ hapA_sepped <- separate_wider_delim(hapAvars, c("Pca2016-15-1","90WI131-1","Pca7
 hapA_melted <- melt(hapA_sepped, id.vars = c("CHROM", "POS", "REF", "ALT"), value.name = "genotype")
 hapA_final <- separate_wider_delim(hapA_melted, variable, delim = "_", names = c("Sample", "Allele"))
 
+hapA_final <- subset(hapA_final, Sample != "90MN5B-1")
+
 hapA_final$Sample <- factor(hapA_final$Sample, levels = c("PCA16-15-1-1", "Pca2016-15-1", "Pca77-46", "17MNBT-14", "17SD133-2",
                                                           "16SD74-2","18MNBT-56",
-                                                          "90MN5B-1","15MN23-1","16MN105-1","17MNBT-6","17TX9-2","18MNBT-41",
+                                                          "15MN23-1","16MN105-1","17MNBT-6","17TX9-2","18MNBT-41",
                                                           "16MN102-3","16MN99-1","17SD126-3","18MNBT-55","15MN16-3","16MN107-3",
                                                           "15OH12-3","16MN85-1","16MN98-2","17TX62-3",
                                                           "17AR69-3","17MNBT-11","17SD132-1","90WI131-1",
@@ -40,9 +42,11 @@ hapB_sepped <- separate_wider_delim(hapBvars, c("Pca2016-15-1","90WI131-1","Pca7
 hapB_melted <- melt(hapB_sepped, id.vars = c("CHROM", "POS", "REF", "ALT"), value.name = "genotype")
 hapB_final <- separate_wider_delim(hapB_melted, variable, delim = "_", names = c("Sample", "Allele"))
 
+hapB_final <- subset(hapB_final, Sample != "90MN5B-1")
+
 hapB_final$Sample <- factor(hapB_final$Sample, levels = c("PCA16-15-1-1", "Pca2016-15-1", "Pca77-46", "17MNBT-14", "17SD133-2",
                                                           "16SD74-2","18MNBT-56",
-                                                          "90MN5B-1","15MN23-1","16MN105-1","17MNBT-6","17TX9-2","18MNBT-41",
+                                                          "15MN23-1","16MN105-1","17MNBT-6","17TX9-2","18MNBT-41",
                                                           "16MN102-3","16MN99-1","17SD126-3","18MNBT-55","15MN16-3","16MN107-3",
                                                           "15OH12-3","16MN85-1","16MN98-2","17TX62-3",
                                                           "17AR69-3","17MNBT-11","17SD132-1","90WI131-1",

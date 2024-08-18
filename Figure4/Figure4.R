@@ -7,7 +7,7 @@ options(scipen = 999)
 
 ## Figure 4A
 
-data2 <- read.delim("20QLD86_haplotypes_mash.txt", header = TRUE, sep = "\t")
+data2 <- read.delim("hap5_hap6_hap23_hap24_containment.txt", header = TRUE, sep = "\t")
 
 data2$haplotype <- factor(data2$haplotype, levels = c("hap5","hap6","hap23","hap24"))
 

@@ -1,5 +1,6 @@
 options(scipen = 999)
 library(ggplot2)
+library(dplyr)
 library(reshape2)
 library(egg)
 
@@ -138,8 +139,10 @@ with_mean <- left_join(both_sub, meandf, by = c("Haplotype", "second"))
 
 with_mean$diff <- with_mean$Coverage / with_mean$covmean
 
-cov_graphs <- ggplot(with_mean) +
-  geom_line(aes(x = (Pos / 1000000), y = diff, group = second, color = second)) +
+no_only <- subset(with_mean, second == "no")
+
+cov_graphs <- ggplot(no_only) +
+  geom_line(aes(x = (Pos / 1000000), y = diff, group = second), color = "black") +
   facet_grid(rows = vars(Haplotype), scales = "fixed") +
   scale_x_continuous(expand = c(0,0)) +
   scale_y_continuous(expand = c(0.05,0), limits = c(0,10)) +

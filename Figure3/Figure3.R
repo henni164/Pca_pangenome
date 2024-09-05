@@ -11,18 +11,17 @@ ocean <- st_point(x = c(0,0)) %>%
   st_buffer(dist = 6371000) %>%
   st_sfc(crs = crs_string)
 
-# country polygons, cut to size
 world <- gisco_countries %>% 
-  st_intersection(ocean %>% st_transform(4326)) %>% # select visible area only
+  st_intersection(ocean %>% st_transform(4326)) %>% 
   st_transform(crs = crs_string) # reproject to ortho
 
-# one of the visible ones red (don't really matter which one :)
+
 world$fill_color <- ifelse(world$ISO3_CODE == "AUS", "interesting", "dull")
 
-# now the action!
+
 aus_globe <- ggplot(data = world) +
-  geom_sf(data = ocean, fill = "white", color = "black") + # background first
-  geom_sf(aes(fill = fill_color), lwd = .2, color = "black") + # now land over the oceans
+  geom_sf(data = ocean, fill = "white", color = "black") + 
+  geom_sf(aes(fill = fill_color), lwd = .2, color = "black") + 
   scale_fill_manual(values = c("interesting" = "#FFE043",
                                "dull" = "grey90"),
                     guide = "none") +
@@ -37,18 +36,16 @@ ocean <- st_point(x = c(0,0)) %>%
   st_buffer(dist = 6371000) %>%
   st_sfc(crs = crs_string)
 
-# country polygons, cut to size
 world <- gisco_countries %>% 
-  st_intersection(ocean %>% st_transform(4326)) %>% # select visible area only
+  st_intersection(ocean %>% st_transform(4326)) %>% 
   st_transform(crs = crs_string) # reproject to ortho
 
-# one of the visible ones red (don't really matter which one :)
 world$fill_color <- ifelse(world$ISO3_CODE == "USA", "interesting", "dull")
 
 # now the action!
 us_globe <- ggplot(data = world) +
-  geom_sf(data = ocean, fill = "white", color = "black") + # background first
-  geom_sf(aes(fill = fill_color), lwd = .2, color = "black") + # now land over the oceans
+  geom_sf(data = ocean, fill = "white", color = "black") + 
+  geom_sf(aes(fill = fill_color), lwd = .2, color = "black") +
   scale_fill_manual(values = c("interesting" = "#9087FF",
                                "dull" = "grey90"),
                     guide = "none") +
